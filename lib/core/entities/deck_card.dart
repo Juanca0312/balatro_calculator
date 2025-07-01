@@ -2,11 +2,6 @@ import 'package:balatro_calculator/core/enums/card_rank.dart';
 import 'package:balatro_calculator/core/enums/card_suit.dart';
 
 class DeckCard {
-  final CardSuit suit;
-  final CardRank rank;
-  final String assetPath;
-  bool isEnabled;
-
   DeckCard({
     required this.suit,
     required this.rank,
@@ -18,4 +13,13 @@ class DeckCard {
     final path = 'cards/${rank.symbol}_${suit.name}.png';
     return DeckCard(suit: suit, rank: rank, assetPath: path);
   }
+
+  final CardSuit suit;
+  final CardRank rank;
+  final String assetPath;
+  bool isEnabled;
+
+  @override
+  String toString() =>
+      'DeckCard(rank: ${rank.symbol}, suit: ${suit.name}, enabled: $isEnabled)';
 }

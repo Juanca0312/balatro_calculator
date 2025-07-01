@@ -13,6 +13,6 @@ enum CardRank {
   Q('Q'),
   K('K');
 
-  final String symbol;
   const CardRank(this.symbol);
+  final String symbol;
 }

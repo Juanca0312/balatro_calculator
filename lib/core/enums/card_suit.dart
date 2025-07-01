@@ -4,6 +4,6 @@ enum CardSuit {
   clubs('clubs'),
   spades('spades');
 
-  final String name;
   const CardSuit(this.name);
+  final String name;
 }
