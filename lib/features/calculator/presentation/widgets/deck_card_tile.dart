@@ -20,7 +20,8 @@ class DeckCardTile extends StatelessWidget {
       opacity: card.isEnabled ? 1.0 : 0.3,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          border: isSelected ? Border.all(color: Colors.blue, width: 3) : null,
+          color: Colors.white,
+          border: isSelected ? Border.all(color: Colors.blue, width: 2) : null,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Padding(

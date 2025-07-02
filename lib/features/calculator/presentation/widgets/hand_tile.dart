@@ -45,10 +45,7 @@ class HandTile extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Expanded(
-              child: Text(
-                handType.description,
-                style: const TextStyle(fontSize: 16),
-              ),
+              child: Text(handType.title, style: const TextStyle(fontSize: 16)),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

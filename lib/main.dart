@@ -14,6 +14,9 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
     debugShowCheckedModeBanner: false,
+    theme: ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF3CB06F)),
+    ),
     home: MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => DeckCubit()),
