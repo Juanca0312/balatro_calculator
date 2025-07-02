@@ -18,21 +18,21 @@ class HandsSection extends StatelessWidget {
         children: [
           Text(
             'Nivel jugadas',
-            style: textTheme.headlineMedium?.copyWith(color: colorScheme.green),
+            style: textTheme.headlineSmall?.copyWith(color: colorScheme.green),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 10),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: orderedHands.length,
-            itemBuilder: (context, index) {
-              final hand = orderedHands[index];
-              return HandTile(
-                handType: hand,
-                onTap: () async => _showHandExample(context, hand: hand),
-              );
-            },
+          Expanded(
+            child: ListView.builder(
+              itemCount: orderedHands.length,
+              itemBuilder: (context, index) {
+                final hand = orderedHands[index];
+                return HandTile(
+                  handType: hand,
+                  onTap: () async => _showHandExample(context, hand: hand),
+                );
+              },
+            ),
           ),
         ],
       ),

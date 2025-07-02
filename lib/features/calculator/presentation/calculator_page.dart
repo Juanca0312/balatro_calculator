@@ -9,34 +9,67 @@ class CalculatorPage extends StatelessWidget {
   const CalculatorPage({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    body: SingleChildScrollView(
-      child: Column(
-        children: [
-          const Text('Balatro Game'),
-          SizedBox(
-            height: 60,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: SingleChildScrollView(
+            child: Column(
               children: [
-                Expanded(child: GreenContainer(text: 'Desafio', onTap: () {})),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: GreenContainer(
-                    text: 'Nivel jugadas',
-                    onTap: () async => _showHandsBottomSheet(context),
+                const SizedBox(height: 10),
+                Text('Balatro Game', style: textTheme.headlineSmall),
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: 50,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: GreenContainer(text: 'Desafio', onTap: () {}),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: GreenContainer(
+                          text: 'Nivel jugadas',
+                          onTap: () async => _showHandsBottomSheet(context),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: 50,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: GreenContainer(text: 'Jokers', onTap: () {}),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: GreenContainer(
+                          text: 'Consumibles',
+                          onTap: () {},
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const DeckSection(),
+                const SizedBox(height: 20),
+                Center(child: GreenContainer(text: 'Jugada', onTap: () {})),
               ],
             ),
           ),
-          const Row(children: [Text('Jokers'), Text('Consumibles')]),
-          const DeckSection(),
-          const Text('Calcular fichas de jugada'),
-        ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 
   Future<void> _showHandsBottomSheet(BuildContext context) async {
     final handCubit = context.read<HandCubit>();

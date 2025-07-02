@@ -18,9 +18,9 @@ class DeckSection extends StatelessWidget {
       child: GridView.builder(
         padding: const EdgeInsets.all(8),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 8,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
+          crossAxisCount: 6,
+          mainAxisSpacing: 6,
+          crossAxisSpacing: 6,
           childAspectRatio: 0.7,
         ),
         itemCount: deck.length,

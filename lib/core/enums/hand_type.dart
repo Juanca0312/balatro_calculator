@@ -33,7 +33,7 @@ extension HandTypeExtension on HandType {
       case HandType.fourOfAKind:
         return 'Póker';
       case HandType.straightFlush:
-        return 'Escalera corrida / color';
+        return 'Escalera color';
       case HandType.royalFlush:
         return 'Escalera real';
     }

@@ -21,6 +21,9 @@ class HandTile extends StatelessWidget {
       return handScore.getScoreForLevel(level);
     });
 
+    // final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -38,15 +41,10 @@ class HandTile extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Text(
-                'Lv. $level',
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
+              child: Text('Lv. $level', style: textTheme.bodyMedium),
             ),
             const SizedBox(width: 8),
-            Expanded(
-              child: Text(handType.title, style: const TextStyle(fontSize: 16)),
-            ),
+            Expanded(child: Text(handType.title, style: textTheme.bodyMedium)),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
@@ -55,10 +53,7 @@ class HandTile extends StatelessWidget {
               ),
               child: Text(
                 score.toString(),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: textTheme.bodyMedium?.copyWith(color: Colors.white),
               ),
             ),
           ],

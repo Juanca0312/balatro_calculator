@@ -16,6 +16,7 @@ class MainApp extends StatelessWidget {
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
       colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF3CB06F)),
+      fontFamily: 'Press Start 2P',
     ),
     home: MultiBlocProvider(
       providers: [

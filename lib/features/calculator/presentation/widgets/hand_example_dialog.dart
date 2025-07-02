@@ -24,7 +24,7 @@ class HandExampleDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
-            height: 70,
+            height: 90,
             width: MediaQuery.of(context).size.width,
             child: ListView(
               scrollDirection: Axis.horizontal,
@@ -37,8 +37,8 @@ class HandExampleDialog extends StatelessWidget {
                           margin: const EdgeInsets.symmetric(horizontal: 4),
                           child: Image.asset(
                             card.assetPath,
-                            width: 40,
-                            height: 60,
+                            width: 55,
+                            height: 80,
                           ),
                         ),
                       )

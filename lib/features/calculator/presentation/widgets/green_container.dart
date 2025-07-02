@@ -23,7 +23,7 @@ class GreenContainer extends StatelessWidget {
           child: Center(
             child: Text(
               text,
-              style: textTheme.headlineSmall?.copyWith(
+              style: textTheme.labelMedium?.copyWith(
                 color: colorScheme.lightGreen,
               ),
               textAlign: TextAlign.center,
