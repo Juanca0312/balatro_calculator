@@ -10,7 +10,7 @@ class DeckCard {
   });
 
   factory DeckCard.create(CardSuit suit, CardRank rank) {
-    final path = 'cards/${rank.symbol}_${suit.name}.png';
+    final path = 'assets/cards/${rank.symbol}_${suit.name}.png';
     return DeckCard(suit: suit, rank: rank, assetPath: path);
   }
 
