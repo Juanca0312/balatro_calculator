@@ -16,11 +16,12 @@ class DeckCubit extends Cubit<DeckState> {
 
   void toggleSelection(DeckCard card) {
     final selected = Set<DeckCard>.from(state.selectedCards);
-    if (selected.contains(card)) {
-      selected.remove(card);
-    } else {
-      selected.add(card);
-    }
+    final isSelected = selected.contains(card);
+
+    if (!isSelected && selected.length >= 5) return;
+
+    isSelected ? selected.remove(card) : selected.add(card);
+
     emit(state.copyWith(selectedCards: selected));
   }
 
