@@ -4,6 +4,7 @@ import 'package:balatro_calculator/features/calculator/presentation/cubits/hand/
 import 'package:balatro_calculator/features/calculator/presentation/sections/deck_section.dart';
 import 'package:balatro_calculator/features/calculator/presentation/sections/hands_section.dart';
 import 'package:balatro_calculator/features/calculator/presentation/widgets/green_container.dart';
+import 'package:balatro_calculator/features/calculator/presentation/widgets/hand_result_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -67,20 +68,7 @@ class CalculatorPage extends StatelessWidget {
                 Center(
                   child: GreenContainer(
                     text: 'Jugada',
-                    onTap: () {
-                      final cards =
-                          context
-                              .read<DeckCubit>()
-                              .state
-                              .selectedCards
-                              .toList();
-                      final activeLevels =
-                          context.read<HandCubit>().state.activeLevels;
-                      context.read<CalculatorCubit>().checkDeck(
-                        cards,
-                        activeLevels,
-                      );
-                    },
+                    onTap: () async => _validateHand(context),
                   ),
                 ),
               ],
@@ -88,6 +76,20 @@ class CalculatorPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _validateHand(BuildContext context) async {
+    final cards = context.read<DeckCubit>().state.selectedCards.toList();
+    final activeLevels = context.read<HandCubit>().state.activeLevels;
+    final result = context.read<CalculatorCubit>().checkDeck(
+      cards,
+      activeLevels,
+    );
+
+    showDialog(
+      context: context,
+      builder: (_) => HandResultDialog(scoreResult: result),
     );
   }
 
