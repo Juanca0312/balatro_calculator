@@ -1,3 +1,5 @@
+import 'package:balatro_calculator/features/calculator/presentation/cubits/calculator/calculator_cubit.dart';
+import 'package:balatro_calculator/features/calculator/presentation/cubits/deck/deck_cubit.dart';
 import 'package:balatro_calculator/features/calculator/presentation/cubits/hand/hand_cubit.dart';
 import 'package:balatro_calculator/features/calculator/presentation/sections/deck_section.dart';
 import 'package:balatro_calculator/features/calculator/presentation/sections/hands_section.dart';
@@ -62,7 +64,25 @@ class CalculatorPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 const DeckSection(),
                 const SizedBox(height: 20),
-                Center(child: GreenContainer(text: 'Jugada', onTap: () {})),
+                Center(
+                  child: GreenContainer(
+                    text: 'Jugada',
+                    onTap: () {
+                      final cards =
+                          context
+                              .read<DeckCubit>()
+                              .state
+                              .selectedCards
+                              .toList();
+                      final activeLevels =
+                          context.read<HandCubit>().state.activeLevels;
+                      context.read<CalculatorCubit>().checkDeck(
+                        cards,
+                        activeLevels,
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),
