@@ -1,5 +1,4 @@
 enum CardRank {
-  A('A', 11, 14),
   two('2', 2, 2),
   three('3', 3, 3),
   four('4', 4, 4),
@@ -11,7 +10,8 @@ enum CardRank {
   ten('10', 10, 10),
   J('J', 10, 11),
   Q('Q', 10, 12),
-  K('K', 10, 13);
+  K('K', 10, 13),
+  A('A', 11, 14);
 
   const CardRank(this.symbol, this.gameScore, this.value);
 

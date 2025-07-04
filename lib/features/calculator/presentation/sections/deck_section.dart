@@ -13,15 +13,30 @@ class DeckSection extends StatelessWidget {
       (DeckCubit cubit) => cubit.state.selectedCards,
     );
 
+    final size = MediaQuery.of(context).size;
+
+    // Ajusta el ancho deseado por carta (puedes tunear este valor)
+    const desiredCardWidth = 50.0;
+    final crossAxisCount = (size.width / desiredCardWidth).floor().clamp(1, 20);
+
+    // O bien fuerza el crossAxisCount si quieres un valor fijo por orientación
+    // final crossAxisCount = orientation == Orientation.portrait ? 7 : 13;
+
+    // Calcula el aspect ratio dinámico
+    final spacing = 7 * (crossAxisCount + 1); // Espaciado total
+    final cardWidth = (size.width - spacing) / crossAxisCount;
+    final cardHeight = cardWidth / 0.7; // 0.7 es el aspect ratio original
+    final childAspectRatio = cardWidth / cardHeight;
+
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.5,
+      height: size.height * 0.5,
       child: GridView.builder(
         padding: const EdgeInsets.all(8),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 6,
-          mainAxisSpacing: 6,
-          crossAxisSpacing: 6,
-          childAspectRatio: 0.7,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: crossAxisCount,
+          mainAxisSpacing: 7,
+          crossAxisSpacing: 7,
+          childAspectRatio: childAspectRatio,
         ),
         itemCount: deck.length,
         itemBuilder: (context, index) {

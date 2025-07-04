@@ -1,8 +1,8 @@
 enum CardSuit {
+  spades('spades'),
   hearts('hearts'),
-  diamonds('diamonds'),
   clubs('clubs'),
-  spades('spades');
+  diamonds('diamonds');
 
   const CardSuit(this.name);
   final String name;
