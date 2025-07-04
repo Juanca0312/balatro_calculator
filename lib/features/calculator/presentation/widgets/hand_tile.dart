@@ -1,6 +1,7 @@
 import 'package:balatro_calculator/core/enums/hand_type.dart';
 import 'package:balatro_calculator/core/utils/constants.dart';
 import 'package:balatro_calculator/features/calculator/presentation/cubits/hand/hand_cubit.dart';
+import 'package:balatro_calculator/features/calculator/presentation/widgets/level_control.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,13 +36,15 @@ class HandTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text('Lv. $level', style: textTheme.bodyMedium),
+            LevelControl(
+              level: level,
+              onIncrement: () {
+                context.read<HandCubit>().updateLevel(handType, 1);
+              },
+              onDecrement: () {
+                context.read<HandCubit>().updateLevel(handType, -1);
+              },
+              textStyle: textTheme.bodyMedium,
             ),
             const SizedBox(width: 8),
             Expanded(child: Text(handType.title, style: textTheme.bodyMedium)),

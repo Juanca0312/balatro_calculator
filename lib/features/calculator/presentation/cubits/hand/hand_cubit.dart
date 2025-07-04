@@ -12,4 +12,15 @@ class HandCubit extends Cubit<HandState> {
           currentScores: {},
         ),
       );
+
+  void updateLevel(HandType handType, int delta) {
+    final currentLevel = state.activeLevels[handType] ?? 1;
+
+    final newLevel = (currentLevel + delta).clamp(1, 3);
+
+    final updatedLevels = Map<HandType, int>.from(state.activeLevels)
+      ..[handType] = newLevel;
+
+    emit(state.copyWith(activeLevels: updatedLevels));
+  }
 }
