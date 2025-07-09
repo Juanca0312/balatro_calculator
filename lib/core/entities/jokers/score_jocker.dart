@@ -1,38 +1,94 @@
-import 'package:balatro_calculator/core/entities/hand_score.dart';
+import 'package:balatro_calculator/core/entities/deck_card.dart';
 import 'package:balatro_calculator/core/entities/jokers/joker.dart';
-import 'package:balatro_calculator/core/entities/jokers/score_jocker.dart';
 import 'package:balatro_calculator/core/enums/card_suit.dart';
 import 'package:balatro_calculator/core/enums/hand_type.dart';
+import 'package:balatro_calculator/features/calculator/domain/entities/hand_score_result.dart';
 
-const handScores = [
-  HandScore(handType: HandType.highCard, scores: [0, 10, 20, 30]),
-  HandScore(handType: HandType.pair, scores: [10, 20, 30, 40]),
-  HandScore(handType: HandType.twoPair, scores: [30, 50, 70, 90]),
-  HandScore(handType: HandType.threeOfAKind, scores: [70, 100, 130, 160]),
-  HandScore(handType: HandType.straight, scores: [90, 130, 170, 210]),
-  HandScore(handType: HandType.flush, scores: [130, 160, 190, 220]),
-  HandScore(handType: HandType.fullHouse, scores: [180, 220, 260, 300]),
-  HandScore(handType: HandType.fourOfAKind, scores: [220, 270, 320, 370]),
-  HandScore(handType: HandType.straightFlush, scores: [250, 310, 370, 430]),
-  HandScore(handType: HandType.royalFlush, scores: [300, 380, 460, 540]),
-  // Quinteto descartado por testeo
-];
+/// Specialized interface for jokers that add score
+/// Interfaz especializada para jokers que otorgan puntaje adicional
+abstract class ScoreJoker extends Joker {
+  const ScoreJoker({
+    required super.name,
+    required super.assetPath,
+    required super.rarity,
+    required super.cost,
+    required super.type,
+  });
 
-const orderedHands = [
-  // HandType.quintet,
-  HandType.royalFlush,
-  HandType.straightFlush,
-  HandType.fourOfAKind,
-  HandType.fullHouse,
-  HandType.flush,
-  HandType.straight,
-  HandType.threeOfAKind,
-  HandType.twoPair,
-  HandType.pair,
-  HandType.highCard,
-];
+  int apply({
+    required HandScoreResult baseScore,
+    required List<DeckCard> playedCards,
+  });
+}
 
-final List<Joker> jokers = [
+/// Base reusable class for jokers that give a fixed chip bonus
+class FixedChipJoker extends ScoreJoker {
+  FixedChipJoker({
+    required super.name,
+    required super.assetPath,
+    required super.rarity,
+    required super.cost,
+    required super.type,
+    required this.bonus,
+  });
+
+  final int bonus;
+
+  @override
+  int apply({
+    required HandScoreResult baseScore,
+    required List<DeckCard> playedCards,
+  }) => bonus;
+}
+
+/// Base class for jokers that count cards by suit
+class SuitBasedJoker extends ScoreJoker {
+  SuitBasedJoker({
+    required super.name,
+    required super.assetPath,
+    required super.rarity,
+    required super.cost,
+    required super.type,
+    required this.suit,
+    required this.multiplier,
+  });
+
+  final CardSuit suit;
+  final int multiplier;
+
+  @override
+  int apply({
+    required HandScoreResult baseScore,
+    required List<DeckCard> playedCards,
+  }) {
+    final count = playedCards.where((c) => c.suit == suit).length;
+    return count * multiplier;
+  }
+}
+
+/// Base class for jokers that trigger on hand type
+class HandTypeJoker extends ScoreJoker {
+  HandTypeJoker({
+    required super.name,
+    required super.assetPath,
+    required super.rarity,
+    required super.cost,
+    required super.type,
+    required this.validTypes,
+    required this.bonus,
+  });
+
+  final List<HandType> validTypes;
+  final int bonus;
+
+  @override
+  int apply({
+    required HandScoreResult baseScore,
+    required List<DeckCard> playedCards,
+  }) => validTypes.contains(baseScore.handType) ? bonus : 0;
+}
+
+final List<ScoreJoker> jokers = [
   FixedChipJoker(
     name: 'Joker básico',
     assetPath: 'assets/jokers/basic.webp',

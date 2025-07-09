@@ -22,7 +22,6 @@ class HandTile extends StatelessWidget {
       return handScore.getScoreForLevel(level);
     });
 
-    // final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
     return GestureDetector(

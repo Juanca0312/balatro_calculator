@@ -1,8 +1,10 @@
 import 'package:balatro_calculator/features/calculator/presentation/cubits/calculator/calculator_cubit.dart';
 import 'package:balatro_calculator/features/calculator/presentation/cubits/deck/deck_cubit.dart';
 import 'package:balatro_calculator/features/calculator/presentation/cubits/hand/hand_cubit.dart';
+import 'package:balatro_calculator/features/calculator/presentation/cubits/jokers/jokers_cubit.dart';
 import 'package:balatro_calculator/features/calculator/presentation/sections/deck_section.dart';
 import 'package:balatro_calculator/features/calculator/presentation/sections/hands_section.dart';
+import 'package:balatro_calculator/features/calculator/presentation/sections/jokers_section.dart';
 import 'package:balatro_calculator/features/calculator/presentation/widgets/green_container.dart';
 import 'package:balatro_calculator/features/calculator/presentation/widgets/hand_result_dialog.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +52,10 @@ class CalculatorPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Expanded(
-                        child: GreenContainer(text: 'Jokers', onTap: () {}),
+                        child: GreenContainer(
+                          text: 'Jokers',
+                          onTap: () async => _showJokersModal(context),
+                        ),
                       ),
                       const SizedBox(width: 10),
                       Expanded(
@@ -111,6 +116,30 @@ class CalculatorPage extends StatelessWidget {
               child: BlocProvider.value(
                 value: handCubit,
                 child: const HandsSection(),
+              ),
+            ),
+          ),
+    );
+  }
+
+  Future<void> _showJokersModal(BuildContext context) async {
+    final jokersCubit = context.read<JokersCubit>();
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder:
+          (bottomSheetContext) => FractionallySizedBox(
+            heightFactor: 0.9,
+            widthFactor: 1,
+            child: DecoratedBox(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              ),
+              child: BlocProvider.value(
+                value: jokersCubit,
+                child: const JokersSection(),
               ),
             ),
           ),

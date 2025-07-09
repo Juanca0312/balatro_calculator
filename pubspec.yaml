@@ -21,6 +21,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/cards/
+    - assets/jokers/
   fonts:
     - family: Press Start 2P
       fonts:
