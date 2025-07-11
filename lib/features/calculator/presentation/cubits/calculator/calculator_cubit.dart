@@ -1,4 +1,5 @@
 import 'package:balatro_calculator/core/entities/deck_card.dart';
+import 'package:balatro_calculator/core/entities/jokers/joker.dart';
 import 'package:balatro_calculator/core/enums/hand_type.dart';
 import 'package:balatro_calculator/features/calculator/domain/entities/hand_score_result.dart';
 import 'package:balatro_calculator/features/calculator/domain/service/hand_score_service.dart';
@@ -17,8 +18,10 @@ class CalculatorCubit extends Cubit<CalculatorState> {
   HandScoreResult checkDeck(
     List<DeckCard> cards,
     Map<HandType, int> activeLevels,
+    List<Joker> jokers,
   ) => _handScoreService.evaluateHandScore(
     activeLevels: activeLevels,
+    jokers: jokers,
     cards: cards,
   );
 }

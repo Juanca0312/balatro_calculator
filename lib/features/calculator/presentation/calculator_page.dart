@@ -87,9 +87,12 @@ class CalculatorPage extends StatelessWidget {
   Future<void> _validateHand(BuildContext context) async {
     final cards = context.read<DeckCubit>().state.selectedCards.toList();
     final activeLevels = context.read<HandCubit>().state.activeLevels;
+    final jokers = context.read<JokersCubit>().state.selectedJokers;
+
     final result = context.read<CalculatorCubit>().checkDeck(
       cards,
       activeLevels,
+      jokers,
     );
 
     showDialog(
