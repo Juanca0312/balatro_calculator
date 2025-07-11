@@ -35,6 +35,7 @@ const orderedHands = [
 final List<Joker> jokers = [
   FixedChipJoker(
     name: 'Joker básico',
+    description: 'Otorga 30 fichas',
     assetPath: 'assets/jokers/basic.webp',
     rarity: 'Común',
     cost: 200,
@@ -43,6 +44,8 @@ final List<Joker> jokers = [
   ),
   SuitBasedJoker(
     name: 'Joker codicioso',
+    description:
+        'Otorga 20 fichas por cada carta de diamante jugada en la mano',
     assetPath: 'assets/jokers/codicioso.webp',
     rarity: 'Común',
     cost: 400,
@@ -52,6 +55,7 @@ final List<Joker> jokers = [
   ),
   SuitBasedJoker(
     name: 'Joker lujurioso',
+    description: 'Otorga 20 fichas por cada carta de corazon jugada en la mano',
     assetPath: 'assets/jokers/lujurioso.webp',
     rarity: 'Común',
     cost: 400,
@@ -61,6 +65,7 @@ final List<Joker> jokers = [
   ),
   SuitBasedJoker(
     name: 'Joker iracundo',
+    description: 'Otorga 20 fichas por cada carta de espadas jugada en la mano',
     assetPath: 'assets/jokers/iracundo.webp',
     rarity: 'Común',
     cost: 400,
@@ -70,6 +75,7 @@ final List<Joker> jokers = [
   ),
   SuitBasedJoker(
     name: 'Joker glotón',
+    description: 'Otorga 20 fichas por cada carta de trébol jugada en la mano',
     assetPath: 'assets/jokers/gloton.webp',
     rarity: 'Común',
     cost: 400,
@@ -79,6 +85,8 @@ final List<Joker> jokers = [
   ),
   HandTypeJoker(
     name: 'Joker feliz',
+    description:
+        'Otorga 50 fichas si la mano jugada tiene un par (valido para par, doble par, trio, full house y poker)',
     assetPath: 'assets/jokers/feliz.webp',
     rarity: 'Común',
     cost: 300,
@@ -94,6 +102,8 @@ final List<Joker> jokers = [
   ),
   HandTypeJoker(
     name: 'Joker amistoso',
+    description:
+        'Otorga 70 fichas si la mano jugada tiene un doble par (valido para doble par, full house y poker)',
     assetPath: 'assets/jokers/amistoso.webp',
     rarity: 'Común',
     cost: 400,
@@ -103,6 +113,8 @@ final List<Joker> jokers = [
   ),
   HandTypeJoker(
     name: 'Joker estrafalario',
+    description:
+        'Otorga 80 fichas si la mano jugada tiene un trio (valido para trio, full house y poker)',
     assetPath: 'assets/jokers/estrafalario.webp',
     rarity: 'Común',
     cost: 400,
@@ -116,6 +128,8 @@ final List<Joker> jokers = [
   ),
   HandTypeJoker(
     name: 'Joker extravagante',
+    description:
+        'Otorga 120 fichas si la mano jugada tiene una escalera (valido para escalera, escalera de color y escalera real)',
     assetPath: 'assets/jokers/extravagante.webp',
     rarity: 'Común',
     cost: 500,
@@ -129,6 +143,8 @@ final List<Joker> jokers = [
   ),
   HandTypeJoker(
     name: 'Joker gracioso',
+    description:
+        'Otorga 90 fichas si la mano jugada tiene color (valido para color y escalera de color)',
     assetPath: 'assets/jokers/gracioso.webp',
     rarity: 'Común',
     cost: 400,

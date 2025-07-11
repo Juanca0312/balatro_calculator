@@ -7,11 +7,13 @@ class JokerCardTile extends StatelessWidget {
     required this.joker,
     required this.isSelected,
     required this.onTap,
+    required this.onInfoTap,
   });
 
   final Joker joker;
   final bool isSelected;
   final VoidCallback onTap;
+  final VoidCallback onInfoTap;
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -40,11 +42,20 @@ class JokerCardTile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(4),
+                  child: Image.asset(joker.assetPath, fit: BoxFit.contain),
+                ),
+              ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                 decoration: const BoxDecoration(
                   color: Colors.black87,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(8),
+                  ),
                 ),
                 child: Text(
                   joker.name,
@@ -54,22 +65,15 @@ class JokerCardTile extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                   textAlign: TextAlign.center,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(4),
-                  child: Image.asset(joker.assetPath, fit: BoxFit.contain),
                 ),
               ),
             ],
           ),
         ),
+        // Cost badge (top-left)
         Positioned(
-          bottom: 4,
-          right: 4,
+          top: 4,
+          left: 4,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
             decoration: BoxDecoration(
@@ -82,6 +86,26 @@ class JokerCardTile extends StatelessWidget {
                 color: Colors.white,
                 fontSize: 10,
                 fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+        // Info icon (top-right)
+        Positioned(
+          top: 5,
+          right: 5,
+          child: GestureDetector(
+            onTap: onInfoTap,
+            child: Container(
+              padding: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.5),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.info_outline,
+                size: 20,
+                color: Colors.blueAccent,
               ),
             ),
           ),

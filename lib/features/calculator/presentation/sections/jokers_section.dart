@@ -1,6 +1,8 @@
+import 'package:balatro_calculator/core/entities/jokers/joker.dart';
 import 'package:balatro_calculator/core/theme/app_colors.dart';
 import 'package:balatro_calculator/features/calculator/presentation/cubits/jokers/jokers_cubit.dart';
 import 'package:balatro_calculator/features/calculator/presentation/widgets/joker_card_tile.dart';
+import 'package:balatro_calculator/features/calculator/presentation/widgets/joker_description_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,13 +16,18 @@ class JokersSection extends StatelessWidget {
     final state = context.select((JokersCubit cubit) => cubit.state);
 
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(10),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Jokers',
-            style: textTheme.headlineSmall?.copyWith(color: colorScheme.green),
-            textAlign: TextAlign.center,
+          Center(
+            child: Text(
+              'Jokers',
+              style: textTheme.headlineSmall?.copyWith(
+                color: colorScheme.green,
+              ),
+              textAlign: TextAlign.center,
+            ),
           ),
           const SizedBox(height: 10),
           TextField(
@@ -33,6 +40,22 @@ class JokersSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.only(left: 5),
+            child: Text(
+              'Selected jokers: ${state.selectedJokers.length} / 5',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                color:
+                    state.selectedJokers.length == 5
+                        ? Colors.red
+                        : Colors.black,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 10),
           Expanded(
             child: GridView.builder(
               padding: const EdgeInsets.all(4),
@@ -42,15 +65,17 @@ class JokersSection extends StatelessWidget {
                 mainAxisSpacing: 8,
                 childAspectRatio: 0.7, // ajusta según tu imagen
               ),
-              itemCount: state.filteredJokers.length,
+              itemCount: state.visibleJokers.length,
               itemBuilder: (context, index) {
-                final joker = state.filteredJokers[index];
+                final joker = state.visibleJokers[index];
                 final isSelected = state.selectedJokers.contains(joker);
                 final cubit = context.read<JokersCubit>();
 
                 return JokerCardTile(
                   joker: joker,
                   isSelected: isSelected,
+                  onInfoTap:
+                      () async => _showJokerDescription(context, joker: joker),
                   onTap:
                       () =>
                           isSelected
@@ -62,6 +87,16 @@ class JokersSection extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> _showJokerDescription(
+    BuildContext context, {
+    required Joker joker,
+  }) async {
+    showDialog(
+      context: context,
+      builder: (_) => JokerDescriptionDialog(joker: joker),
     );
   }
 }

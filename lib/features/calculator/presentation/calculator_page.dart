@@ -53,7 +53,7 @@ class CalculatorPage extends StatelessWidget {
                     children: [
                       Expanded(
                         child: GreenContainer(
-                          text: 'Jokers',
+                          text: _getJokersTitle(context),
                           onTap: () async => _showJokersModal(context),
                         ),
                       ),
@@ -124,7 +124,7 @@ class CalculatorPage extends StatelessWidget {
 
   Future<void> _showJokersModal(BuildContext context) async {
     final jokersCubit = context.read<JokersCubit>();
-    showModalBottomSheet(
+    await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
@@ -144,5 +144,13 @@ class CalculatorPage extends StatelessWidget {
             ),
           ),
     );
+
+    jokersCubit.resetFilter();
+  }
+
+  String _getJokersTitle(BuildContext context) {
+    final selectedJokersCount =
+        context.watch<JokersCubit>().state.selectedJokers.length;
+    return 'Jokers\n$selectedJokersCount / 5';
   }
 }

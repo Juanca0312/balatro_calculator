@@ -17,6 +17,13 @@ class JokersState extends Equatable {
   final List<Joker> selectedJokers;
   final List<Joker> filteredJokers;
 
+  List<Joker> get visibleJokers {
+    final selectedSet = selectedJokers.toSet();
+    final selected = filteredJokers.where(selectedSet.contains);
+    final unselected = filteredJokers.where((j) => !selectedSet.contains(j));
+    return [...selected, ...unselected];
+  }
+
   JokersState copyWith({
     List<Joker>? allJokers,
     List<Joker>? selectedJokers,

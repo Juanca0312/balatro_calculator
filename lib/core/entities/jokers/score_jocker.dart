@@ -9,6 +9,7 @@ import 'package:balatro_calculator/features/calculator/domain/entities/hand_scor
 abstract class ScoreJoker extends Joker {
   const ScoreJoker({
     required super.name,
+    required super.description,
     required super.assetPath,
     required super.rarity,
     required super.cost,
@@ -25,6 +26,7 @@ abstract class ScoreJoker extends Joker {
 class FixedChipJoker extends ScoreJoker {
   FixedChipJoker({
     required super.name,
+    required super.description,
     required super.assetPath,
     required super.rarity,
     required super.cost,
@@ -45,6 +47,7 @@ class FixedChipJoker extends ScoreJoker {
 class SuitBasedJoker extends ScoreJoker {
   SuitBasedJoker({
     required super.name,
+    required super.description,
     required super.assetPath,
     required super.rarity,
     required super.cost,
@@ -70,6 +73,7 @@ class SuitBasedJoker extends ScoreJoker {
 class HandTypeJoker extends ScoreJoker {
   HandTypeJoker({
     required super.name,
+    required super.description,
     required super.assetPath,
     required super.rarity,
     required super.cost,
@@ -87,109 +91,3 @@ class HandTypeJoker extends ScoreJoker {
     required List<DeckCard> playedCards,
   }) => validTypes.contains(baseScore.handType) ? bonus : 0;
 }
-
-final List<ScoreJoker> jokers = [
-  FixedChipJoker(
-    name: 'Joker básico',
-    assetPath: 'assets/jokers/basic.webp',
-    rarity: 'Común',
-    cost: 200,
-    type: 'fichas+',
-    bonus: 30,
-  ),
-  SuitBasedJoker(
-    name: 'Joker codicioso',
-    assetPath: 'assets/jokers/codicioso.webp',
-    rarity: 'Común',
-    cost: 400,
-    type: 'fichas+',
-    suit: CardSuit.diamonds,
-    multiplier: 20,
-  ),
-  SuitBasedJoker(
-    name: 'Joker lujurioso',
-    assetPath: 'assets/jokers/lujurioso.webp',
-    rarity: 'Común',
-    cost: 400,
-    type: 'fichas+',
-    suit: CardSuit.hearts,
-    multiplier: 20,
-  ),
-  SuitBasedJoker(
-    name: 'Joker iracundo',
-    assetPath: 'assets/jokers/iracundo.webp',
-    rarity: 'Común',
-    cost: 400,
-    type: 'fichas+',
-    suit: CardSuit.spades,
-    multiplier: 20,
-  ),
-  SuitBasedJoker(
-    name: 'Joker glotón',
-    assetPath: 'assets/jokers/gloton.webp',
-    rarity: 'Común',
-    cost: 400,
-    type: 'fichas+',
-    suit: CardSuit.clubs,
-    multiplier: 20,
-  ),
-  HandTypeJoker(
-    name: 'Joker feliz',
-    assetPath: 'assets/jokers/feliz.webp',
-    rarity: 'Común',
-    cost: 300,
-    type: 'fichas+',
-    validTypes: [
-      HandType.pair,
-      HandType.twoPair,
-      HandType.threeOfAKind,
-      HandType.fullHouse,
-      HandType.fourOfAKind,
-    ],
-    bonus: 50,
-  ),
-  HandTypeJoker(
-    name: 'Joker amistoso',
-    assetPath: 'assets/jokers/amistoso.webp',
-    rarity: 'Común',
-    cost: 400,
-    type: 'fichas+',
-    validTypes: [HandType.twoPair, HandType.fullHouse, HandType.fourOfAKind],
-    bonus: 70,
-  ),
-  HandTypeJoker(
-    name: 'Joker estrafalario',
-    assetPath: 'assets/jokers/estrafalario.webp',
-    rarity: 'Común',
-    cost: 400,
-    type: 'fichas+',
-    validTypes: [
-      HandType.threeOfAKind,
-      HandType.fullHouse,
-      HandType.fourOfAKind,
-    ],
-    bonus: 80,
-  ),
-  HandTypeJoker(
-    name: 'Joker extravagante',
-    assetPath: 'assets/jokers/extravagante.webp',
-    rarity: 'Común',
-    cost: 500,
-    type: 'fichas+',
-    validTypes: [
-      HandType.straight,
-      HandType.straightFlush,
-      HandType.royalFlush,
-    ],
-    bonus: 120,
-  ),
-  HandTypeJoker(
-    name: 'Joker gracioso',
-    assetPath: 'assets/jokers/gracioso.webp',
-    rarity: 'Común',
-    cost: 400,
-    type: 'fichas+',
-    validTypes: [HandType.flush, HandType.straightFlush],
-    bonus: 90,
-  ),
-];

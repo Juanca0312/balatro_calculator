@@ -2,6 +2,7 @@
 abstract class Joker {
   const Joker({
     required this.name,
+    required this.description,
     required this.assetPath,
     required this.rarity,
     required this.cost,
@@ -9,6 +10,7 @@ abstract class Joker {
   });
 
   final String name;
+  final String description;
   final String assetPath;
   final String rarity;
   final int cost;
